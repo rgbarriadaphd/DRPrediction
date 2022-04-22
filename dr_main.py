@@ -4,7 +4,7 @@
 # Project: DRPrediction
 # File: dr_main.py
 
-Description: "Enter feature description here"
+Description: Main script to run project options
 """
 
 
