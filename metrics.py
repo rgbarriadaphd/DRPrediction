@@ -157,6 +157,29 @@ class PerformanceMetrics:
 
         plt.savefig(os.path.join(self._out_folder, 'confusion_matrix.png'))
 
+        cm = self._confusion_matrix/self._confusion_matrix.sum(axis=0)
+        class_names = self._classes
+
+        # Plot confusion matrix in a beautiful manner
+        fig = plt.figure(figsize=(16, 14))
+        ax = plt.subplot()
+        sns.heatmap(cm, annot=True, ax=ax, fmt='g', annot_kws={"size": 35})  # annot=True to annotate cells
+        # labels, title and ticks
+        ax.set_xlabel('Predicted', fontsize=20)
+        ax.xaxis.set_label_position('bottom')
+        plt.xticks(rotation=90)
+        ax.xaxis.set_ticklabels(class_names, fontsize=20)
+        ax.xaxis.tick_bottom()
+
+        ax.set_ylabel('True', fontsize=20)
+        ax.yaxis.set_ticklabels(class_names, fontsize=20)
+        plt.yticks(rotation=0)
+
+        plt.title('Normalized Confusion Matrix', fontsize=30)
+
+        plt.savefig(os.path.join(self._out_folder, 'normalized_confusion_matrix.png'))
+
+
 
 if __name__ == '__main__':
     # Test functions
@@ -166,7 +189,8 @@ if __name__ == '__main__':
     pm = PerformanceMetrics(ground,
                             prediction,
                             output_folder='outputs/',
-                            classes=['class_0', 'class_1', 'class_2', 'class_3', 'class_4'],
+                            # classes=['class_0', 'class_1', 'class_2', 'class_3', 'class_4'],
+                            classes=['apple', 'orange', 'mango'],
                             percent=True,
                             formatted=2
                             )
