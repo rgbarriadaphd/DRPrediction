@@ -192,6 +192,7 @@ def train_model(model, device, train_loader, test_loader, validation_loader=None
 
     optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
     criterion = nn.CrossEntropyLoss()
+    scheduler = MultiStepLR(optimizer, milestones=[30, 250], gamma=0.1)
 
     losses = []
     train_accuracies = []
@@ -224,6 +225,7 @@ def train_model(model, device, train_loader, test_loader, validation_loader=None
                 pbar.update(sample.shape[0])
         epoch_loss = running_loss / n_train
         losses.append(epoch_loss)
+        scheduler.step()
 
         if SAVE_PLOT:
             print('Evaluate train/validation dataset accuracy')
@@ -323,8 +325,11 @@ def main():
     model_accuracy = evaluate_model(model, test_dataloader, device, metrics=True)
     print(f'Model accuracy: : {model_accuracy}')
 
+    executing_time = str(timedelta(seconds=time.time() - t0))
+
     with open(os.path.join(OUTPUTS, 'accuracy'), 'w') as f_out:
-        f_out.write(f'Model accuracy: {model_accuracy}')
+        f_out.write(f'Model accuracy: {model_accuracy}\n')
+        f_out.write(f'Execution time: {executing_time}\n')
 
     if SAVE_LOSS_PLOT:
         print("Plot loss")

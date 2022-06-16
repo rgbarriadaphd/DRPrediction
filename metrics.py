@@ -143,13 +143,13 @@ class PerformanceMetrics:
         ax = plt.subplot()
         sns.heatmap(cm, annot=True, ax=ax, fmt='g', annot_kws={"size": 35})  # annot=True to annotate cells
         # labels, title and ticks
-        ax.set_xlabel('Predicted', fontsize=20)
+        ax.set_xlabel('True', fontsize=20)
         ax.xaxis.set_label_position('bottom')
         plt.xticks(rotation=90)
         ax.xaxis.set_ticklabels(class_names, fontsize=20)
         ax.xaxis.tick_bottom()
 
-        ax.set_ylabel('True', fontsize=20)
+        ax.set_ylabel('Predicted', fontsize=20)
         ax.yaxis.set_ticklabels(class_names, fontsize=20)
         plt.yticks(rotation=0)
 
@@ -163,15 +163,15 @@ class PerformanceMetrics:
         # Plot confusion matrix in a beautiful manner
         fig = plt.figure(figsize=(16, 14))
         ax = plt.subplot()
-        sns.heatmap(cm, annot=True, ax=ax, fmt='g', annot_kws={"size": 35})  # annot=True to annotate cells
+        sns.heatmap(cm, annot=True, ax=ax, fmt='g', annot_kws={"size": 15})  # annot=True to annotate cells
         # labels, title and ticks
-        ax.set_xlabel('Predicted', fontsize=20)
+        ax.set_xlabel('True', fontsize=20)
         ax.xaxis.set_label_position('bottom')
         plt.xticks(rotation=90)
         ax.xaxis.set_ticklabels(class_names, fontsize=20)
         ax.xaxis.tick_bottom()
 
-        ax.set_ylabel('True', fontsize=20)
+        ax.set_ylabel('Predicted', fontsize=20)
         ax.yaxis.set_ticklabels(class_names, fontsize=20)
         plt.yticks(rotation=0)
 
